@@ -76,13 +76,12 @@ for j in range(400):
 
 
     for k in range(K):
-    #print(k,2*k+2,np.shape(np_x))
-    #print(u.value[k+1])
-    #    const+= [x[2*k+1,:]            == x[2*k+2,:]/2 + x[2*k,:]/2 + dt/8*(linf(np_x[2*k,:], np_u[k,:],x[2*k,:], u[k,:] ) - linf(np_x[2*k+2,:], np_u[k+1,:],x[2*k+2,:], u[k+1,:]))]
-    #    const+= [x[2*k+2,:] - x[2*k,:] ==  (linf(np_x[2*k,:], np_u[k,:], x[2*k,:], u[k,:] ) + 4 * linf(np_x[2*k+1,:], (np_u[k,:] + np_u[k+1,:]) / 2, x[2*k+1], (u[k,:] + u[k+1,:])/2) + linf(np_x[2*k+2,:], np_u[k+1,:], x[2*k+2], u[k,:]))*dt/6]   
+
+        const+= [x[2*k+1,:]            == x[2*k+2,:]/2 + x[2*k,:]/2 + dt/8*(linf(np_x[2*k,:], np_u[k,:],x[2*k,:], u[k,:] ) - linf(np_x[2*k+2,:], np_u[k+1,:],x[2*k+2,:], u[k+1,:]))]
+        const+= [x[2*k+2,:] - x[2*k,:] ==  (linf(np_x[2*k,:], np_u[k,:], x[2*k,:], u[k,:] ) + 4 * linf(np_x[2*k+1,:], (np_u[k,:] + np_u[k+1,:]) / 2, x[2*k+1], (u[k,:] + u[k+1,:])/2) + linf(np_x[2*k+2,:], np_u[k+1,:], x[2*k+2], u[k,:]))*dt/6]   
 
 
-        const += [x[k+1,:] - x[k,:] ==   0.5*dt*(linf(np_x[k+1,:],np_u[k+1,:],x[k+1,:],u[k+1,:])+linf(np_x[k,:],np_u[k,:],x[k,:],u[k,:]))]
+        #const += [x[k+1,:] - x[k,:] ==   0.5*dt*(linf(np_x[k+1,:],np_u[k+1,:],x[k+1,:],u[k+1,:])+linf(np_x[k,:],np_u[k,:],x[k,:],u[k,:]))]
 
 
         cost = cost + 0.5*cvx.huber( x[k,0] - np.pi, M=0.5) + 0.01 * cvx.huber(u[k,:]) +  0.5*cvx.huber( x[k,1] - 0, M=0.25)
